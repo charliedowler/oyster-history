@@ -39,7 +39,10 @@ Oyster.Oyster.prototype.history = function(callback) {
 function toTable(html, callback) {
   jsdom.env({html: html, scripts: ["http://code.jquery.com/jquery.js", "https://raw.github.com/charliedowler/table-to-json/master/src/jquery.tabletojson.js"], done: function(errors, window) {
     var $ = window.$;
-
+    if (/No pay as you go/.test(html)) {
+      callback(null, []);
+      return false;
+    }
     var before = $(html).tableToJSON();
     var after = [];
     var currentDate;
