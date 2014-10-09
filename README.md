@@ -2,6 +2,8 @@
 
 > Scrape your oyster card journey history
 
+Checkout [node-oyster-history-cli](https://github.com/charliedowler/node-oyster-history-cli) to view your oyster history in your command prompt.
+
 ## Installation
 ```sh
 $ npm install --save node-oyster-history
