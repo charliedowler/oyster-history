@@ -2,7 +2,7 @@
 
 > Scrape your oyster card journey history
 
-Checkout [node-oyster-history-cli](https://github.com/charliedowler/node-oyster-history-cli) to view your oyster history in your command prompt.
+Checkout [oyster-history-cli](https://github.com/charliedowler/oyster-history-cli) to view your oyster history in your command prompt.
 
 ## Installation
 ```sh
@@ -16,7 +16,7 @@ var TravelHistory = require('node-oyster-history');
 
 TravelHistory('mail@example.com', 'p4ssw0rd', function(history) {
     console.log(history);
-    //=> Returns array of travel data 
+    //=> Returns array of travel data
     [ { date: 'Tuesday, 30 September 2014 10:33',
     balance: '£23.30',
     charge: '+£20.00',
