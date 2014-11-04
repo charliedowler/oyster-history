@@ -1,5 +1,5 @@
 {
-  "name": "node-oyster-history",
+  "name": "oyster-history",
   "version": "0.1.0",
   "description": "Get oyster card travel history",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/charliedowler/node-oyster-history.git"
+    "url": "git://github.com/charliedowler/oyster-history.git"
   },
   "keywords": [
     "oyster"
@@ -16,9 +16,9 @@
   "author": "charliedowler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/charliedowler/node-oyster-history/issues"
+    "url": "https://github.com/charliedowler/oyster-history/issues"
   },
-  "homepage": "https://github.com/charliedowler/node-oyster-history",
+  "homepage": "https://github.com/charliedowler/oyster-history",
   "dependencies": {
     "oyster": "0.1.2",
     "request": "~2.29.0",

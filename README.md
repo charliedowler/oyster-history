@@ -1,4 +1,4 @@
-# node-oyster-history
+# oyster-history
 
 > Scrape your oyster card journey history
 
@@ -6,13 +6,13 @@ Checkout [oyster-history-cli](https://github.com/charliedowler/oyster-history-cl
 
 ## Installation
 ```sh
-$ npm install --save node-oyster-history
+$ npm install --save oyster-history
 ```
 
 ## Usage
 
 ```js
-var TravelHistory = require('node-oyster-history');
+var TravelHistory = require('oyster-history');
 
 TravelHistory('mail@example.com', 'p4ssw0rd', function(history) {
     console.log(history);
