@@ -1,7 +1,8 @@
 var Oyster = require('oyster');
 var request = require('request');
-var cheerio = require('cheerio');
 var jsdom = require('jsdom');
+var $ = require('jquery')(jsdom.jsdom().parentWindow);
+$.fn.tableToJSON = require('./tabletojson')($);
 
 Oyster.Oyster.prototype.history = function(callback) {
   var oyster = this;
@@ -23,39 +24,37 @@ Oyster.Oyster.prototype.history = function(callback) {
       jar: oyster.jar
     }, function(err, res, body) {
       if(err) return callback(err);
-      toTable(cheerio.load(body).html('table.journeyhistory'), callback);
+      toTable($(body).find('table.journeyhistory'), callback);
     });
   }.bind(this));
 };
 
 function toTable(html, callback) {
-  jsdom.env({html: html, scripts: ["http://code.jquery.com/jquery.js", "https://raw.github.com/charliedowler/table-to-json/master/src/jquery.tabletojson.js"], done: function(errors, window) {
-    var $ = window.$;
-    if (/No pay as you go/.test(html)) {
-      callback(null, []);
-      return false;
-    }
-    var before = $(html).tableToJSON();
-    var after = [];
-    var currentDate;
-    for (var i in before) {
-      var trip = before[i];
-      if (/daily/.test(trip['Journey / Action'])) {
-        currentDate = trip['Date / Time'];
-      }
-      else {
-        var formattedTrip = {};
-        formattedTrip.date = currentDate + ' ' + trip['Date / Time'];
-        formattedTrip.balance = trip.Balance;
-        formattedTrip.charge = trip.Charge;
-        formattedTrip.journey = trip['Journey / Action'];
+  if (/No pay as you go/.test(html)) {
+    callback(null, []);
+    return false;
+  }
 
-        after.push(formattedTrip);
-      }
+  var before = $(html).tableToJSON();
+  var after = [];
+  var currentDate;
+  for (var i in before) {
+    var trip = before[i];
+    if (/daily/.test(trip['Journey / Action'])) {
+      currentDate = trip['Date / Time'];
     }
+    else {
+      var formattedTrip = {};
+      formattedTrip.date = currentDate + ' ' + trip['Date / Time'];
+      formattedTrip.balance = trip.Balance;
+      formattedTrip.charge = trip.Charge;
+      formattedTrip.journey = trip['Journey / Action'];
 
-    callback(null, after);
-  }});
+      after.push(formattedTrip);
+    }
+  }
+
+  callback(null, after);
 }
 
 module.exports = function(username, password, callback) {
