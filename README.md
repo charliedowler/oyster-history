@@ -14,7 +14,7 @@ $ npm install --save oyster-history
 ```js
 var TravelHistory = require('oyster-history');
 
-TravelHistory('mail@example.com', 'p4ssw0rd', function(history) {
+TravelHistory('mail@example.com', 'p4ssw0rd', function(err, history) {
     console.log(history);
     //=> Returns array of travel data
     [ { date: 'Tuesday, 30 September 2014 10:33',
